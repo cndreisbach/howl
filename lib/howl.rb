@@ -4,6 +4,7 @@ require 'mustache'
 require 'hashie'
 require 'pathname'
 require 'fileutils'
+require 'time'
 
 $:.unshift File.dirname(__FILE__)
 
@@ -36,8 +37,9 @@ module Howl
 
     def write_to_disk
       FileUtils.rm_r(path "site") if File.exist?(path "site")
-      FileUtils.makedirs(path "site")
-      pages.each do |page|
+      #raise (pages + posts).map(&:class).inspect
+      (pages + posts).each do |page|
+        FileUtils.makedirs(page.output_path.dirname)
         page.output_path.open("w") do |fh|
           fh.write page.render
         end
@@ -67,11 +69,17 @@ module Howl
       rendered = Mustache.render(@content, render_view)
       template = render_view.delete("template")
       if template
-        rendered = @site.templates[template + @extension].render(render_view.merge("content" => rendered))
+        begin
+          rendered = @site.templates[template + @extension].render(render_view.merge("content" => rendered))
+        rescue NoMethodError => ex
+          puts "Warning: Template #{template + @extension} does not exist in file #{path}"
+          rendered
+        end
       end
 
       rendered
     end
+
     private
 
     def load_file
@@ -110,6 +118,10 @@ module Howl
 
     def date
       view.date? ? Time.parse(view.date) : File.mtime(path)
+    end
+
+    def output_path
+      site.path("site/posts") + date.strftime("%Y/%m/%d") + path.basename
     end
 
     def <=>(other)

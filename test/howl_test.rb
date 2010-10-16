@@ -15,6 +15,13 @@ context "Site" do
     }.all?
   }
 
+  should("write out all posts") {
+    topic.write_to_disk
+    topic.posts.map { |post|
+      Dir[topic.path("site/posts") + "**/*"].map { |path| File.basename(path) }.include?(post.path.basename.to_s)
+    }.all?
+  }
+
   context "Page" do
     context "simple.html" do
       setup { Page.new(fixture_path("pages/simple.html"), @site) }
@@ -56,6 +63,16 @@ context "Site" do
   end
 
   context "Post" do
+    setup { Post.new(fixture_path("posts/first_post.html"), @site) }
+
+    asserts("date is equal to date from front matter") { 
+      topic.date == Time.parse("2010/09/04") 
+    }
+
+    asserts(:output_path).equals {
+      topic.site.path("site/posts/2010/09/04") + "first_post.html"
+    }
+
     context "without a date" do
       setup { Post.new(fixture_path("posts/no_date.html"), @site) }
 
