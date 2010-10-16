@@ -30,7 +30,7 @@ module Howl
       @converter
     end
 
-    def render(render_view = {})
+    def render(render_view = View.new)
       render_view.merge!(@view)
       rendered = converter.convert(Mustache.render(@content, render_view))
       template = render_view.delete("template")

@@ -62,6 +62,17 @@ context "Site" do
 </html>
       ].clean
     end
+
+    context "index.html" do
+      setup { Page.new(fixture_path("pages/index.html"), @site) }
+
+      should "show all posts" do
+        doc = Nokogiri.parse(topic.render)
+        @site.posts.map { |post|
+          doc.search("div##{post.dom_id}").empty?
+        }.none?
+      end
+    end
   end
 
   context "Post" do

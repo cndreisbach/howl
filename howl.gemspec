@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.files = [
     ".gitignore",
      "Gemfile",
+     "Gemfile.lock",
      "LICENSE",
      "README.markdown",
      "Rakefile",
@@ -26,9 +27,13 @@ Gem::Specification.new do |s|
      "howl.gemspec",
      "lib/howl.rb",
      "lib/howl/converter.rb",
+     "lib/howl/converters/markdown.rb",
+     "lib/howl/converters/sass.rb",
      "lib/howl/plugin.rb",
      "lib/howl/site.rb",
      "lib/howl/template.rb",
+     "test/fixtures/pages/css/modules/colors.scss",
+     "test/fixtures/pages/css/screen.scss",
      "test/fixtures/pages/has_template.html",
      "test/fixtures/pages/no_yaml.html",
      "test/fixtures/pages/simple.html",
@@ -58,20 +63,26 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_development_dependency(%q<riot>, [">= 0.11"])
+      s.add_development_dependency(%q<nokogiri>, [">= 0"])
       s.add_runtime_dependency(%q<rdiscount>, [">= 0"])
       s.add_runtime_dependency(%q<mustache>, [">= 0"])
       s.add_runtime_dependency(%q<hashie>, [">= 0"])
+      s.add_runtime_dependency(%q<haml>, [">= 0"])
     else
       s.add_dependency(%q<riot>, [">= 0.11"])
+      s.add_dependency(%q<nokogiri>, [">= 0"])
       s.add_dependency(%q<rdiscount>, [">= 0"])
       s.add_dependency(%q<mustache>, [">= 0"])
       s.add_dependency(%q<hashie>, [">= 0"])
+      s.add_dependency(%q<haml>, [">= 0"])
     end
   else
     s.add_dependency(%q<riot>, [">= 0.11"])
+    s.add_dependency(%q<nokogiri>, [">= 0"])
     s.add_dependency(%q<rdiscount>, [">= 0"])
     s.add_dependency(%q<mustache>, [">= 0"])
     s.add_dependency(%q<hashie>, [">= 0"])
+    s.add_dependency(%q<haml>, [">= 0"])
   end
 end
 

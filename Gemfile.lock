@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     howl (0.3.0)
+      haml
       hashie
       mustache
       rdiscount
@@ -9,8 +10,10 @@ PATH
 GEM
   remote: http://rubygems.org/
   specs:
+    haml (3.0.17)
     hashie (0.4.0)
     mustache (0.11.2)
+    nokogiri (1.4.3.1)
     rdiscount (1.6.5)
     riot (0.11.4)
       rr
@@ -22,8 +25,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  haml
   hashie
   howl!
   mustache
+  nokogiri
   rdiscount
   riot (>= 0.11)
