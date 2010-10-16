@@ -1,8 +1,22 @@
-= howl
+# Howl
 
-Description goes here.
+Howl is a tiny static site generator.
 
-== Note on Patches/Pull Requests
+## File structure
+
+  /pages
+    index.html
+    about.html
+  /posts
+    first-post.html
+    my-cat-died.html
+  /templates
+    default.html
+    alternate.html
+  /site
+    <generated files go here>
+
+## Note on Patches/Pull Requests
  
 * Fork the project.
 * Make your feature addition or bug fix.
@@ -12,6 +26,6 @@ Description goes here.
   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
 
-== Copyright
+## Copyright
 
 Copyright (c) 2010 Clinton R. Nixon. See LICENSE for details.
