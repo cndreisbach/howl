@@ -18,7 +18,9 @@ context "Site" do
   should("write out all posts") {
     topic.write_to_disk
     topic.posts.map { |post|
-      Dir[topic.path("site/posts") + "**/*"].map { |path| File.basename(path, File.extname(path)) }.include?(post.path.basename(post.extension).to_s)
+      Dir[topic.path("site/posts") + "**/*"].map { |path|
+        File.basename(path, File.extname(path)) 
+      }.include?(post.path.basename(post.extension).to_s)
     }.all?
   }
 
