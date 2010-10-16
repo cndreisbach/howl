@@ -1,11 +1,7 @@
 require 'teststrap'
+include Howl
 
-context "howl" do
-  setup do
-    false
-  end
-
-  asserts "i'm a failure :(" do
-    topic
-  end
+context "Site" do
+  setup { Site.new(fixture_path) }
 end
+
