@@ -14,6 +14,7 @@ begin
     gem.add_runtime_dependency 'rdiscount'
     gem.add_runtime_dependency 'mustache'
     gem.add_runtime_dependency 'hashie'
+    gem.add_runtime_dependency 'haml'
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError

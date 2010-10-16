@@ -1,16 +1,29 @@
 require 'yaml'
-require 'rdiscount'
 require 'mustache'
 require 'hashie'
 require 'pathname'
 require 'fileutils'
 require 'time'
 
+def require_all(path)
+  glob = File.join(File.dirname(__FILE__), path, '*.rb')
+  Dir[glob].each do |f|
+    require f
+  end
+end
+
 $:.unshift File.dirname(__FILE__)
 require 'howl/template'
 require 'howl/site'
 require 'howl/plugin'
 require 'howl/converter'
+require_all 'howl/converters'
+
+class String
+  def drop(num)
+    self.dup.split(//).drop(num).join
+  end
+end
 
 module Howl
   class View < Hashie::Mash

@@ -5,7 +5,7 @@ context "Site" do
   setup { @site = Site.new(fixture_path) }
   
   should("find all pages") {
-    topic.pages == Dir[fixture_path("pages/*")].map { |path| Page.new(path, topic) }
+    topic.pages == Dir[fixture_path("pages/**/*.*")].map { |path| Page.new(path, topic) }
   }
 
   should("write out all pages") {
@@ -18,7 +18,7 @@ context "Site" do
   should("write out all posts") {
     topic.write_to_disk
     topic.posts.map { |post|
-      Dir[topic.path("site/posts") + "**/*"].map { |path|
+      Dir[topic.path("site/posts") + "**/*.*"].map { |path|
         File.basename(path, File.extname(path)) 
       }.include?(post.path.basename(post.extension).to_s)
     }.all?

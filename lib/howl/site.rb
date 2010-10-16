@@ -11,11 +11,11 @@ module Howl
     end
 
     def pages
-      @pages ||= Dir[path "pages/*"].map { |path| Page.new(path, self) }
+      @pages ||= Dir[path "pages/**/*.*"].map { |path| Page.new(path, self) }
     end
 
     def posts
-      @posts ||= Dir[path "posts/*"].map { |path| Post.new(path, self) }.sort
+      @posts ||= Dir[path "posts/**/*.*"].map { |path| Post.new(path, self) }.sort
     end
 
     def templates

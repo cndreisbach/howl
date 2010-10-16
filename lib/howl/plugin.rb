@@ -41,7 +41,7 @@ module Howl
       @priority || :normal
     end
 
-    def <=>(other)
+    def self.<=>(other)
       other.priority <=> self.priority
     end
   end
