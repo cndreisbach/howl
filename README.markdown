@@ -4,17 +4,17 @@ Howl is a tiny static site generator.
 
 ## File structure
 
-  /pages
-    index.html
-    about.html
-  /posts
-    first-post.html
-    my-cat-died.html
-  /templates
-    default.html
-    alternate.html
-  /site
-    <generated files go here>
+    /pages
+      index.html
+      about.html
+    /posts
+      first-post.html
+      my-cat-died.html
+    /templates
+      default.html
+      alternate.html
+    /site
+      <generated files go here>
 
 ## Note on Patches/Pull Requests
  
