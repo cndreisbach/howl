@@ -21,10 +21,27 @@ module Howl
     def pages
       @pages ||= Dir[path "pages/*"].map { |path| Page.new(path, self) }
     end
+
+    def templates
+      @templates ||= Hash[Dir[root + "templates/*"].map { |path| 
+        [Pathname.new(path).relative_path_from(path "templates").to_s, 
+         Template.new(path, self)] 
+      }]
+    end
+
+    def write_to_disk
+      FileUtils.rm_r(path "site") if File.exist?(path "site")
+      FileUtils.makedirs(path "site")
+      pages.each do |page|
+        page.output_path.open("w") do |fh|
+          fh.write page.render
+        end
+      end
+    end
   end
 
   class Template
-    attr_accessor :data, :content
+    attr_accessor :data, :content, :site
 
     def initialize(path, site)
       @site = site
@@ -37,6 +54,16 @@ module Howl
       self.path == other.path && self.class == other.class
     end
 
+    def render(render_data = {})
+      render_data.merge!(@data)
+      rendered = Mustache.render(@content, render_data)
+      template = render_data.delete("template")
+      if template
+        rendered = @site.templates[template + @extension].render(render_data.merge("content" => rendered))
+      end
+
+      rendered
+    end
     private
 
     def load_file
@@ -66,7 +93,7 @@ module Howl
     attr_accessor :path
 
     def output_path
-      root + "site" + path.relative_path_from(site.root + "pages")
+      site.path("site") + path.relative_path_from(site.path "pages")
     end
   end
 
