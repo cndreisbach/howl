@@ -22,8 +22,10 @@ context "Page" do
   context "simple.html" do
     setup { Page.new(fixture_path("pages/simple.html"), @site) }
 
-    asserts(:data).equals({"title" => "This is a simple page"})
     asserts("#content") { topic.content.strip }.equals "<h1>{{title}}</h1>"
+    asserts("#view is correct") {
+      topic.view == View.new(:site => topic.site, :title => "This is a simple page")
+    }
     asserts("#rendered") { topic.render.strip }.equals "<h1>This is a simple page</h1>"
 
     should("be able to find its output path") {
@@ -34,8 +36,10 @@ context "Page" do
   context "no_yaml.html" do
     setup { Page.new(fixture_path("pages/no_yaml.html"), @site) }
 
-    asserts(:data).equals({})
     asserts("#content") { topic.content.strip }.equals "This page has no YAML front-matter."
+    asserts("#view is correct") {
+      topic.view == View.new(:site => topic.site)
+    }
     asserts("#rendered") { topic.render.strip }.equals "This page has no YAML front-matter."
   end
 

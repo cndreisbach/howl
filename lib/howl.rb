@@ -1,6 +1,7 @@
 require 'yaml'
 require 'rdiscount'
 require 'mustache'
+require 'hashie'
 require 'pathname'
 require 'fileutils'
 
@@ -40,8 +41,11 @@ module Howl
     end
   end
 
+  class View < Hashie::Mash
+  end
+
   class Template
-    attr_accessor :data, :content, :site
+    attr_accessor :view, :content, :site
 
     def initialize(path, site)
       @site = site
@@ -54,12 +58,12 @@ module Howl
       self.path == other.path && self.class == other.class
     end
 
-    def render(render_data = {})
-      render_data.merge!(@data)
-      rendered = Mustache.render(@content, render_data)
-      template = render_data.delete("template")
+    def render(render_view = {})
+      render_view.merge!(@view)
+      rendered = Mustache.render(@content, render_view)
+      template = render_view.delete("template")
       if template
-        rendered = @site.templates[template + @extension].render(render_data.merge("content" => rendered))
+        rendered = @site.templates[template + @extension].render(render_view.merge("content" => rendered))
       end
 
       rendered
@@ -68,21 +72,23 @@ module Howl
 
     def load_file
       content = @path.read
-      data, content = content.split("\n\n", 2)
+      view, content = content.split("\n\n", 2)
 
-      if test_for_yaml(data)
-        @data = YAML.load(data)
+      if test_for_yaml(view)
         @content = content
+        view = YAML.load(view)
       else
-        @data = {}
-        @content = "#{data}\n\n#{content}".strip
+        @content = "#{view}\n\n#{content}".strip
+        view = {}
       end
+
+      @view = View.new(view.merge(:site => site))
     end
 
-    def test_for_yaml(data)
+    def test_for_yaml(view)
       begin
-        data = YAML.load(data)
-        data.is_a?(Hash)
+        view = YAML.load(view)
+        view.is_a?(Hash)
       rescue ArgumentError
         false
       end

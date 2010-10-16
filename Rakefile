@@ -13,6 +13,7 @@ begin
     gem.add_development_dependency "riot", ">= 0.11"
     gem.add_runtime_dependency 'rdiscount'
     gem.add_runtime_dependency 'mustache'
+    gem.add_runtime_dependency 'hashie'
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
