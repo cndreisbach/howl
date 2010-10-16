@@ -10,7 +10,9 @@ begin
     gem.email = "crnixon@gmail.com"
     gem.homepage = "http://github.com/crnixon/howl"
     gem.authors = ["Clinton R. Nixon"]
-    gem.add_development_dependency "riot", ">= 0"
+    gem.add_development_dependency "riot", ">= 0.11"
+    gem.add_runtime_dependency 'rdiscount'
+    gem.add_runtime_dependency 'mustache'
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
