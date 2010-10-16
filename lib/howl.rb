@@ -23,6 +23,10 @@ module Howl
       @pages ||= Dir[path "pages/*"].map { |path| Page.new(path, self) }
     end
 
+    def posts
+      @posts ||= Dir[path "posts/*"].map { |path| Post.new(path, self) }.sort
+    end
+
     def templates
       @templates ||= Hash[Dir[root + "templates/*"].map { |path| 
         [Pathname.new(path).relative_path_from(path "templates").to_s, 
@@ -45,7 +49,7 @@ module Howl
   end
 
   class Template
-    attr_accessor :view, :content, :site
+    attr_accessor :view, :content, :site, :path
 
     def initialize(path, site)
       @site = site
@@ -96,13 +100,20 @@ module Howl
   end
 
   class Page < Template
-    attr_accessor :path
-
     def output_path
       site.path("site") + path.relative_path_from(site.path "pages")
     end
   end
 
   class Post < Template
+    include Comparable
+
+    def date
+      view.date? ? Time.parse(view.date) : File.mtime(path)
+    end
+
+    def <=>(other)
+      self.date <=> other.date
+    end
   end
 end
