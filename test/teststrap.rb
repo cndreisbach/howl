@@ -8,3 +8,9 @@ require 'howl'
 def fixture_path(path = ".")
   Pathname.new(File.dirname(__FILE__)) + 'fixtures' + path
 end
+
+class String
+  def clean
+    self.strip.gsub(/\n+/, "\n")
+  end
+end
