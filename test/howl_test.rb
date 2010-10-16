@@ -18,7 +18,7 @@ context "Site" do
   should("write out all posts") {
     topic.write_to_disk
     topic.posts.map { |post|
-      Dir[topic.path("site/posts") + "**/*"].map { |path| File.basename(path) }.include?(post.path.basename.to_s)
+      Dir[topic.path("site/posts") + "**/*"].map { |path| File.basename(path, File.extname(path)) }.include?(post.path.basename(post.extension).to_s)
     }.all?
   }
 
@@ -77,6 +77,14 @@ context "Site" do
       setup { Post.new(fixture_path("posts/no_date.html"), @site) }
 
       asserts("date is equal to file's mtime") { topic.date == File.mtime(topic.path) }
+    end
+  end
+
+  context "A Post in Markdown" do
+    setup { Post.new(fixture_path("posts/markdown_post.md"), @site) }
+
+    should "convert to HTML" do
+      topic.render == RDiscount.new(topic.content).to_html
     end
   end
 end
