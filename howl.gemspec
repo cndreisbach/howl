@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
      "README.markdown",
      "Rakefile",
      "VERSION",
+     "howl.gemspec",
      "lib/howl.rb",
      "test/fixtures/pages/has_template.html",
      "test/fixtures/pages/no_yaml.html",
