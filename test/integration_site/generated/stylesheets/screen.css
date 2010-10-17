@@ -1,0 +1,60 @@
+h1, h2, h3 {
+  font-weight: normal;
+}
+
+a {
+  text-decoration: none;
+  background-color: #FF9;
+  color: black;
+  padding: 3px;
+}
+
+a:hover {
+  border-bottom: 1px solid black;
+}
+
+#container {
+  width: 500px;
+  margin: 0 auto;
+  font: 14px/1.5 Georgia, sans-serif;
+}
+
+#footer {
+  margin-top: 60px;
+  padding-top: 30px;
+  border-top: 1px dotted #999;
+  text-align: center;
+}
+
+div.post {
+  position: relative;
+  margin-top: 60px;
+}
+
+.meta {
+  font-size: .8em;
+  color: #999;
+  font-style: italic;
+}
+
+div.post span.sidebar {
+  position: absolute;
+  top: 5px;
+  left: -225px;
+  width: 200px;
+  text-align: right;
+  border-right: 1px dotted #999;
+  padding-right: 10px;
+  display: block;
+}
+
+a.image-link {
+  background: none;
+  padding: none;
+  border: none;
+}
+
+a.image-link img {
+  border: 1px solid #999;
+  vertical-align: middle;
+}

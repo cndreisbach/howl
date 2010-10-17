@@ -8,6 +8,10 @@ context "Site" do
     topic.pages == Dir[fixture_path("site/**/*.*")].map { |path| Page.new(path, topic) }
   }
 
+  should("read its config") {
+    topic.view.has_key?(:title)
+  }
+
   should("write out all pages") {
     topic.write_to_disk
     topic.pages.map { |page|

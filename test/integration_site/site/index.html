@@ -1,0 +1,14 @@
+template: site
+
+{{#posts}}
+<div class="post">
+  <h2>
+    <a href="{{link}}">{{title}}</a>
+  </h2>
+  <span class="meta sidebar">
+    {{#format_date}}{{date}}{{/format_date}}<br />
+  </span>
+  {{&rendered_content}}
+  <p class="meta"><a href="{{link}}">Permalink</a></p>
+</div>
+{{/posts}}

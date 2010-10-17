@@ -15,5 +15,15 @@ module Howl
         site.posts
       end
     end
+
+    # filters
+
+    def format_date
+      lambda do |text|
+        time = Time.parse(text.to_s)
+        time_format = self.date_format || "%b %-d, %Y at %-I:%M %P"
+        time.strftime(time_format)
+      end
+    end
   end
 end

@@ -11,3 +11,17 @@ class String
   end
 end
 
+def File.binary? name
+  open name do |f|
+    while (b=f.read(256)) do
+      return true if b[ "\0"]
+    end
+  end
+  false
+end
+
+class Pathname
+  def binary?
+    File.binary?(@path)
+  end
+end

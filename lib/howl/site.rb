@@ -1,9 +1,10 @@
 module Howl
   class Site
-    attr_accessor :root
+    attr_accessor :root, :view
 
     def initialize(root)
       @root = Pathname.new(root)
+      load_config
     end
 
     def path(path)
@@ -45,10 +46,23 @@ module Howl
       FileUtils.rm_r(output_path) if File.exist?(output_path)
       (pages + posts).each do |page|
         FileUtils.makedirs(page.output_path.dirname)
-        page.output_path.open("w") do |fh|
-          fh.write page.render
+
+        if page.path.binary?
+          FileUtils.copy(page.path, page.output_path)
+        else
+          page.output_path.open("w") do |fh|
+            fh.write page.render
+          end
         end
       end
+    end
+
+    private
+
+    def load_config
+      view = YAML.load(File.read(path "config.yml")) if path("config.yml").exist?
+      view = {} unless view.is_a?(Hash)
+      @view = View.new(view)
     end
   end
 end
