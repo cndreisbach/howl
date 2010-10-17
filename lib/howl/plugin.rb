@@ -42,7 +42,7 @@ module Howl
     end
 
     def self.<=>(other)
-      other.priority <=> self.priority
+      PRIORITIES[other.priority] <=> PRIORITIES[self.priority]
     end
   end
 
