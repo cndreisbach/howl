@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{howl}
-  s.version = "0.5.0"
+  s.version = "0.5.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Clinton R. Nixon"]
@@ -47,6 +47,7 @@ Gem::Specification.new do |s|
      "test/fixtures/posts/no_date.html",
      "test/fixtures/site/css/modules/colors.scss",
      "test/fixtures/site/css/screen.scss",
+     "test/fixtures/site/empty.html",
      "test/fixtures/site/has_template.html",
      "test/fixtures/site/index.html",
      "test/fixtures/site/no_yaml.html",
