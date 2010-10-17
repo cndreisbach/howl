@@ -8,7 +8,7 @@ module Howl
       viewables.push(*viewables)
     end
 
-    attr_accessor :view, :content, :site, :path, :relative_path, :extension
+    attr_accessor :view, :view_data, :content, :site, :path, :relative_path, :extension
 
     def initialize(path, site)
       @site = site
@@ -63,7 +63,7 @@ module Howl
     private
 
     def find_template(template_name)
-      @site.templates[template_name] || 
+      @site.templates[template_name] ||
       @site.templates[template_name + extension] ||
       @site.templates[template_name + converter.extension]
     end
@@ -78,6 +78,7 @@ module Howl
 
       if test_for_yaml(view)
         @content = content
+        @view_data = view
         view = YAML.load(view)
       else
         @content = "#{view}\n\n#{content}".strip
