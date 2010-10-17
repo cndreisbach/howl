@@ -1,7 +1,7 @@
 module Howl
   class Page < Template
     def output_path
-      site.path("site") + path.relative_path_from(site.path "pages").dirname + output_filename
+      site.output_path(path.relative_path_from(site.pages_path).dirname + output_filename)
     end
   end
 end

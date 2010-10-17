@@ -21,3 +21,5 @@ class Mustache
     true
   end
 end
+
+Riot.verbose

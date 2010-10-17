@@ -11,7 +11,7 @@ module Howl
     end
 
     def output_path
-      site.path("site/posts") + date.strftime("%Y/%m/%d") + output_filename
+      site.output_path("posts") + date.strftime("%Y/%m/%d") + output_filename
     end
 
     def title
@@ -20,6 +20,16 @@ module Howl
 
     def dom_id
       title.slugify
+    end
+
+    def link
+      "/" + output_path.relative_path_from(site.output_path).to_s
+    end
+
+    def rendered_content
+      render_view = view.dup
+      render_view.delete('template')
+      converter.convert(Mustache.render(@content, render_view))
     end
   end
 end

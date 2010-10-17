@@ -21,4 +21,4 @@ pkg
 .sass-cache
 
 ## PROJECT::SPECIFIC
-test/fixtures/site
+test/fixtures/generated

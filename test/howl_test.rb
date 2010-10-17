@@ -5,7 +5,7 @@ context "Site" do
   setup { @site = Site.new(fixture_path) }
   
   should("find all pages") {
-    topic.pages == Dir[fixture_path("pages/**/*.*")].map { |path| Page.new(path, topic) }
+    topic.pages == Dir[fixture_path("site/**/*.*")].map { |path| Page.new(path, topic) }
   }
 
   should("write out all pages") {
@@ -18,7 +18,7 @@ context "Site" do
   should("write out all posts") {
     topic.write_to_disk
     topic.posts.map { |post|
-      Dir[topic.path("site/posts") + "**/*.*"].map { |path|
+      Dir[topic.path("generated/posts") + "**/*.*"].map { |path|
         File.basename(path, File.extname(path)) 
       }.include?(post.path.basename(post.extension).to_s)
     }.all?
@@ -26,7 +26,7 @@ context "Site" do
 
   context "Page" do
     context "simple.html" do
-      setup { Page.new(fixture_path("pages/simple.html"), @site) }
+      setup { Page.new(fixture_path("site/simple.html"), @site) }
 
       asserts("#content") { topic.content.strip }.equals "<h1>{{title}}</h1>"
       asserts("#view is correct") {
@@ -35,12 +35,12 @@ context "Site" do
       asserts("#rendered") { topic.render.strip }.equals "<h1>This is a simple page</h1>"
 
       should("be able to find its output path") {
-        topic.output_path == (topic.site.path "site/simple.html")
+        topic.output_path == (topic.site.output_path "simple.html")
       }
     end
 
     context "no_yaml.html" do
-      setup { Page.new(fixture_path("pages/no_yaml.html"), @site) }
+      setup { Page.new(fixture_path("site/no_yaml.html"), @site) }
 
       asserts("#content") { topic.content.strip }.equals "This page has no YAML front-matter."
       asserts("#view is correct") {
@@ -50,7 +50,7 @@ context "Site" do
     end
 
     context "has_template.html" do
-      setup { Page.new(fixture_path("pages/has_template.html"), @site) }
+      setup { Page.new(fixture_path("site/has_template.html"), @site) }
 
       asserts("#rendered") { topic.render.clean }.equals %Q[
 <html>
@@ -64,7 +64,7 @@ context "Site" do
     end
 
     context "index.html" do
-      setup { Page.new(fixture_path("pages/index.html"), @site) }
+      setup { Page.new(fixture_path("site/index.html"), @site) }
 
       should "show all posts" do
         doc = Nokogiri.parse(topic.render)
@@ -83,8 +83,14 @@ context "Site" do
     }
 
     asserts(:output_path).equals {
-      topic.site.path("site/posts/2010/09/04") + "first_post.html"
+      topic.site.path("generated/posts/2010/09/04") + "first_post.html"
     }
+
+    should("render content") {
+      topic.rendered_content.clean == topic.converter.convert(topic.content).clean
+    }
+
+    asserts(:link).equals { "/posts/2010/09/04/first_post.html" }
 
     context "without a date" do
       setup { Post.new(fixture_path("posts/no_date.html"), @site) }
