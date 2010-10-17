@@ -73,7 +73,7 @@ module Howl
 
     def load_file
       content = @path.read
-      view, content = content.split("\n\n", 2)
+      view, _, content = content.rpartition("\n\n")
 
       if test_for_yaml(view)
         @content = content

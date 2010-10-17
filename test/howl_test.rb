@@ -43,6 +43,15 @@ context "Site" do
       }
     end
 
+    context 'empty.html' do
+      setup { Page.new(fixture_path('site/empty.html'), @site) }
+
+      asserts("#content") { topic.content.strip }.equals ""
+      asserts("#view is correct") {
+        topic.view == View.new(:site => topic.site)
+      }
+    end
+
     context "no_yaml.html" do
       setup { Page.new(fixture_path("site/no_yaml.html"), @site) }
 
