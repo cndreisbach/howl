@@ -8,7 +8,7 @@ module Howl
       viewables.push(*viewables)
     end
 
-    attr_accessor :view, :view_data, :content, :site, :path, :relative_path, :extension
+    attr_accessor :view, :view_yaml, :content, :site, :path, :relative_path, :extension
 
     def initialize(path, site)
       @site = site
@@ -78,14 +78,15 @@ module Howl
 
       view ||= ""
       content ||= ""
+      @view_yaml = view
 
       if test_for_yaml(view)
         @content = content
-        @view_data = view
         view = YAML.load(view)
       else
         @content = "#{view}\n\n#{content}".strip
         view = {}
+        @view_yaml = nil
       end
 
       @view = View.new(view)
