@@ -8,11 +8,12 @@ module Howl
       viewables.push(*viewables)
     end
 
-    attr_accessor :view, :content, :site, :path, :extension
+    attr_accessor :view, :content, :site, :path, :relative_path, :extension
 
     def initialize(path, site)
       @site = site
       @path = Pathname.new(path)
+      @relative_path = path.to_s.gsub(/^#{site.root}/, '')
       @extension = @path.extname
       load_file unless @path.binary?
     end
