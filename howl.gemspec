@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Clinton R. Nixon"]
-  s.date = %q{2010-10-16}
+  s.date = %q{2010-10-17}
   s.description = %q{Howl is a tiny static website/blog generator.}
   s.email = %q{crnixon@gmail.com}
   s.extra_rdoc_files = [
@@ -29,12 +29,17 @@ Gem::Specification.new do |s|
      "lib/howl/converter.rb",
      "lib/howl/converters/markdown.rb",
      "lib/howl/converters/sass.rb",
+     "lib/howl/core_ext.rb",
+     "lib/howl/page.rb",
      "lib/howl/plugin.rb",
+     "lib/howl/post.rb",
      "lib/howl/site.rb",
      "lib/howl/template.rb",
+     "lib/howl/view.rb",
      "test/fixtures/pages/css/modules/colors.scss",
      "test/fixtures/pages/css/screen.scss",
      "test/fixtures/pages/has_template.html",
+     "test/fixtures/pages/index.html",
      "test/fixtures/pages/no_yaml.html",
      "test/fixtures/pages/simple.html",
      "test/fixtures/posts/first_post.html",
