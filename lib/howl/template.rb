@@ -33,14 +33,15 @@ module Howl
     def render(render_view = View.new)
       render_view.merge!(@view)
       rendered = converter.convert(Mustache.render(@content, render_view))
-      template = render_view.delete("template")
+      template_name = render_view.delete("template")
 
-      if template
-        if @site.templates[template + @extension]
-          rendered = @site.templates[template + @extension].render(
+      if template_name
+        template = find_template(template_name)
+        if template
+          rendered = template.render(
               render_view.merge("content" => rendered))
         else
-          puts "Warning: Template #{template + @extension} does not exist in file #{path}"
+          puts "Warning: Template #{template_name} does not exist in file #{path}"
           rendered
         end
       end
@@ -49,6 +50,12 @@ module Howl
     end
 
     private
+
+    def find_template(template_name)
+      @site.templates[template_name] || 
+      @site.templates[template_name + extension] ||
+      @site.templates[template_name + converter.extension]
+    end
 
     def load_file
       content = @path.read
