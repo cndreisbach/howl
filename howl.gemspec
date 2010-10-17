@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{howl}
-  s.version = "0.4.1"
+  s.version = "0.5.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Clinton R. Nixon"]
@@ -41,6 +41,7 @@ Gem::Specification.new do |s|
      "sample_site/site/index.html",
      "sample_site/templates/default.html",
      "sample_site/templates/site.html",
+     "test/fixtures/config.yml",
      "test/fixtures/posts/first_post.html",
      "test/fixtures/posts/markdown_post.md",
      "test/fixtures/posts/no_date.html",
@@ -55,6 +56,18 @@ Gem::Specification.new do |s|
      "test/fixtures/templates/post.html",
      "test/fixtures/templates/site.html",
      "test/howl_test.rb",
+     "test/integration_site/config.yml",
+     "test/integration_site/generated/images/logo.png",
+     "test/integration_site/generated/index.html",
+     "test/integration_site/generated/posts/2010/10/17/post.html",
+     "test/integration_site/generated/stylesheets/screen.css",
+     "test/integration_site/posts/post.md",
+     "test/integration_site/site/images/logo.png",
+     "test/integration_site/site/index.html",
+     "test/integration_site/site/stylesheets/screen.css",
+     "test/integration_site/templates/post.html",
+     "test/integration_site/templates/site.html",
+     "test/integration_test.rb",
      "test/teststrap.rb"
   ]
   s.homepage = %q{http://github.com/crnixon/howl}
@@ -64,6 +77,7 @@ Gem::Specification.new do |s|
   s.summary = %q{A tiny static website/blog generator.}
   s.test_files = [
     "test/howl_test.rb",
+     "test/integration_test.rb",
      "test/teststrap.rb"
   ]
 
