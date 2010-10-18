@@ -1,2 +1,3 @@
 site_name: dce.gitwrite.com
 site_url: "http://dce.gitwrite.com"
+date_format: "%Y-%m-%d, at %I:%M %p"

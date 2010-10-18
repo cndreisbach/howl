@@ -15,7 +15,7 @@ module Howl
         site.posts
       end
     end
-
+    
     # filters
 
     def format_date
