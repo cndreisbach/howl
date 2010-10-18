@@ -7,7 +7,7 @@ module Howl
     end
 
     def <=>(other)
-      self.date <=> other.date
+      other.date <=> self.date
     end
 
     def output_path
