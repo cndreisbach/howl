@@ -16,6 +16,16 @@ Howl is a tiny static site generator.
     /site
       <generated files go here>
 
+### Changing the date format
+
+In `config.yml` add a line similar to the following:
+
+    date_format: "%Y-%m-%d, at %I:%M %p"
+
+The above format renders like this:
+
+    2010-10-18, at 02:18 PM
+
 ## Note on Patches/Pull Requests
  
 * Fork the project.
