@@ -23,3 +23,4 @@ pkg
 ## PROJECT::SPECIFIC
 test/fixtures/generated
 sample_site/generated
+test/integration_site/generated
