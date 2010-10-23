@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+$:.push(File.join(File.dirname(__FILE__), '..', 'lib'))
+require 'howl/generator'
+
+directory = ARGV.shift
+Howl::Generator.generate(directory)
