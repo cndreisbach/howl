@@ -5,13 +5,15 @@
 
 Gem::Specification.new do |s|
   s.name = %q{howl}
-  s.version = "0.5.5"
+  s.version = "0.6.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Clinton R. Nixon"]
-  s.date = %q{2010-10-17}
+  s.date = %q{2010-10-23}
+  s.default_executable = %q{howl}
   s.description = %q{Howl is a tiny static website/blog generator.}
   s.email = %q{crnixon@gmail.com}
+  s.executables = ["howl"]
   s.extra_rdoc_files = [
     "LICENSE",
      "README.markdown"
@@ -19,28 +21,33 @@ Gem::Specification.new do |s|
   s.files = [
     ".gitignore",
      "Gemfile",
-     "Gemfile.lock",
      "LICENSE",
      "README.markdown",
      "Rakefile",
      "VERSION",
+     "bin/howl",
      "howl.gemspec",
      "lib/howl.rb",
      "lib/howl/converter.rb",
      "lib/howl/converters/markdown.rb",
      "lib/howl/converters/sass.rb",
      "lib/howl/core_ext.rb",
+     "lib/howl/generator.rb",
      "lib/howl/page.rb",
      "lib/howl/plugin.rb",
      "lib/howl/post.rb",
+     "lib/howl/sample_site/.gitignore",
+     "lib/howl/sample_site/Rakefile",
+     "lib/howl/sample_site/config.yml",
+     "lib/howl/sample_site/posts/first_post.md",
+     "lib/howl/sample_site/site/css/screen.scss",
+     "lib/howl/sample_site/site/index.html",
+     "lib/howl/sample_site/templates/default.html",
+     "lib/howl/sample_site/templates/post.html",
+     "lib/howl/sample_site/templates/site.html",
      "lib/howl/site.rb",
      "lib/howl/template.rb",
      "lib/howl/view.rb",
-     "sample_site/Rakefile",
-     "sample_site/posts/first_post.md",
-     "sample_site/site/index.html",
-     "sample_site/templates/default.html",
-     "sample_site/templates/site.html",
      "test/fixtures/config.yml",
      "test/fixtures/posts/first_post.html",
      "test/fixtures/posts/markdown_post.md",
@@ -58,10 +65,6 @@ Gem::Specification.new do |s|
      "test/fixtures/templates/site.html",
      "test/howl_test.rb",
      "test/integration_site/config.yml",
-     "test/integration_site/generated/images/logo.png",
-     "test/integration_site/generated/index.html",
-     "test/integration_site/generated/posts/2010/10/17/post.html",
-     "test/integration_site/generated/stylesheets/screen.css",
      "test/integration_site/posts/post.md",
      "test/integration_site/site/images/logo.png",
      "test/integration_site/site/index.html",
