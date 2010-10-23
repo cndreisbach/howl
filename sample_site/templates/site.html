@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset=utf-8 />
-  <title>{{title}}</title>
+  <meta charset="utf-8" />
+  <title>{{site_title}} - {{title}}</title>
+  <link rel="stylesheet" href="/css/screen.css" type="text/css" />
   <!--[if IE]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
@@ -12,6 +13,12 @@
   </style>
 </head>
 <body>
-  {{& content}}
+  <header><h1><a href="/">{{site_name}}</a></h1></header>
+  <section id="content">
+    {{& content}}
+  </section>
+  <footer>
+  <span class="meta">Powered by Howl; Theme inspired by <a href="http://www.tumblr.com/theme/325">langer</a></span>
+  </footer>
 </body>
 </html>

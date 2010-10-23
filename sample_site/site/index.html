@@ -1,10 +1,12 @@
-template: default.html
+template: site
 
 {{#posts}}
   <article id="{{dom_id}}" class="post">
-    <h2 class="post-title"><a href="{{link}}">{{title}}</a></h2>
-    <div class="post-content">
-      {{& rendered_content}}
-    </div>
+    <h2><a href="{{link}}">{{title}}</a></h2>
+    <span class="meta sidebar">
+      {{#format_date}}{{date}}{{/format_date}}<br/>
+    </span>
+    {{& rendered_content}}
+    <p class="meta"><a href="{{link}}">Permalink</a></p>
   </article>
 {{/posts}}
